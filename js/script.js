@@ -11,26 +11,6 @@ function campoMinato (){
     // aggiungo la costante per le bombe 
     const nBombs = 16;
 
-    function drawSquare(n,numSquare){
-        
-        const squareWidth = Math.sqrt(numSquare);
-        const square = document.createElement('div');
-        square.classList.add ('square');
-        square.innerText = n;
-
-        square.style.width = `calc(100% / ${squareWidth})`;
-        square.style.height = square.style.width;
-
-        square.addEventListener('click', squareClick);
-        return square;
-    }
-
-    function squareClick() {
-        if (!this) return;
-        this.classList.add('active');
-        console.log(this.innerText);
-    }
-
     btn.addEventListener('click', play);
 
     function play (){
@@ -57,6 +37,34 @@ function campoMinato (){
         for (let i = 1; i <= nSquare; i++){
             let square = drawSquare(i,nSquare);
             playground.append (square);
+        }
+
+        function squareClick() {
+            if (!this) return;
+            // aggiungo le condizioni in caso la casella contenga una bomba 
+            // (se l'array delle bombe include il numero della casella)
+            if (bombs.includes(parseInt(this.innerText))){
+                this.classList.add('bomb'); 
+                this.innerHTML = '<i class="fa-solid fa-bomb fa-beat-fade"></i>';
+            } else {
+                this.classList.add('active');
+            }
+            
+            console.log(this.innerText);
+        }
+
+        function drawSquare(n,numSquare){
+        
+            const squareWidth = Math.sqrt(numSquare);
+            const square = document.createElement('div');
+            square.classList.add ('square');
+            square.innerText = n;
+    
+            square.style.width = `calc(100% / ${squareWidth})`;
+            square.style.height = square.style.width;
+    
+            square.addEventListener('click', squareClick);
+            return square;
         }
     }
 

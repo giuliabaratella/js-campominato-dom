@@ -50,3 +50,8 @@ body {
     border: 3px solid var(--color-border-square-click);
     color: var(--color-border-square);
 }
+.bomb {
+    background-color: rgb(228, 105, 116);
+    border: 3px solid rgb(155, 73, 80);
+    color: white
+}
