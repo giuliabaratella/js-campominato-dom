@@ -1,0 +1,52 @@
+:root {
+	--color-border-square: #53866b;
+    --color-bg-square: #71b184;
+	--color-bg-main: #aae4c4;
+	--color-border-square-click: #f3b72b;
+	--color-inner-square-click: #ffe793;
+	--color-text: #704638;
+}
+
+body {
+    background-color: var(--color-bg-main);
+}
+#button {
+    border-radius: 10px;
+    padding: 5px 10px;
+    border:2px solid var(--color-border-square-click);
+    background-color: var(--color-inner-square-click);
+    color: var(--color-text);
+    font-size: 1.5em;
+    font-weight: bold;
+    transition: all 0.1s;
+}
+#button:active {
+    transform: scale(0.95);
+    background-color: var(--color-border-square-click);
+}
+#playground {
+    margin: 80px auto;
+    width: 700px;
+    height: 700px;
+    border: 3px solid var(--color-border-square);
+    background-color: var(--color-bg-square);
+
+}
+
+.square {
+    /* width: calc(100% / 10);
+    height: calc(100% / 10); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-text);
+    border: 3px solid var(--color-border-square);
+    font-size: 1.6em;
+    cursor: pointer;
+}
+
+.active {
+    background-color: var(--color-inner-square-click);
+    border: 3px solid var(--color-border-square-click);
+    color: var(--color-border-square);
+}
