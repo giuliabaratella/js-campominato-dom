@@ -6,20 +6,21 @@ function campoMinato (){
     
     const btn = document.getElementById('button');
     const playground = document.getElementById('playground');
-    const alert = document.querySelector('.alert');
+    const myAlert = document.querySelector('.my-alert');
     const difficultyBox = document.getElementById('difficulty');
     // aggiungo la costante per le bombe 
     const nBombs = 16;
     // aggiungo la variabile del punteggio 
     let score = 0;
     const nScore = document.getElementById('n-score');
-    
+    nScore.innerHTML = score;
 
     btn.addEventListener('click', play);
 
     function play (){
-
-        alert.innerHTML = '';
+        score = 0;
+        nScore.innerHTML = 0;
+        myAlert.innerHTML = '';
         playground.innerHTML = '';
         let nSquare = 0;
 
@@ -32,7 +33,7 @@ function campoMinato (){
         } else if (difficulty === '3'){
             nSquare = 49;
         } else {
-            alert.innerHTML = 'Attenzione! scegli la difficoltà a cui vuoi giocare.'
+            myAlert.innerHTML = 'Attenzione! scegli la difficoltà a cui vuoi giocare'
         }
 
         let bombs = createBombs(nSquare);
@@ -50,10 +51,12 @@ function campoMinato (){
             if (bombs.includes(parseInt(this.innerText))){
                 this.classList.add('bomb'); 
                 this.innerHTML = '<i class="fa-solid fa-bomb fa-beat-fade"></i>';
+                gameOver(score);
             } else {
                 this.classList.add('active');
                 score++;
                 nScore.innerHTML = score;
+                win(score);
             }
             
             console.log(this.innerText);
@@ -72,6 +75,21 @@ function campoMinato (){
             square.addEventListener('click', squareClick);
             return square;
         }
+
+        // creo la funzione per la vittoria e la sconfitta
+
+        function win (score){
+            const maxScore = (nSquare - nBombs);
+            console.log (maxScore);
+            if (score === maxScore){
+                alert(`Hai vinto! Il tuo punteggio è ${score}`)
+            }
+        }
+
+        function gameOver(score) {
+            alert(`Hai trovato una bomba, hai perso! Il tuo punteggio è ${score}`)
+        }
+        
     }
 
     // creo la funzione per generare le bombe 
@@ -88,6 +106,7 @@ function campoMinato (){
         }
         return arrayBombs;
     }
+
 
     function getRndInteger(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
