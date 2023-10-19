@@ -10,6 +10,10 @@ function campoMinato (){
     const difficultyBox = document.getElementById('difficulty');
     // aggiungo la costante per le bombe 
     const nBombs = 16;
+    // aggiungo la variabile del punteggio 
+    let score = 0;
+    const nScore = document.getElementById('n-score');
+    
 
     btn.addEventListener('click', play);
 
@@ -48,6 +52,8 @@ function campoMinato (){
                 this.innerHTML = '<i class="fa-solid fa-bomb fa-beat-fade"></i>';
             } else {
                 this.classList.add('active');
+                score++;
+                nScore.innerHTML = score;
             }
             
             console.log(this.innerText);
