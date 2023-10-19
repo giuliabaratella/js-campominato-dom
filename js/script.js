@@ -2,25 +2,25 @@
 
 campoMinato();
 
-// Inserisco tutto in una function per non agire nello scope globale 
 function campoMinato (){
     
     const btn = document.getElementById('button');
     const playground = document.getElementById('playground');
     const alert = document.querySelector('.alert');
     const difficultyBox = document.getElementById('difficulty');
+    // aggiungo la costante per le bombe 
+    const nBombs = 16;
 
-    // preparo la funzione per creare un quadrato 
     function drawSquare(n,numSquare){
-        // calcolo il valore della larghrzza del quadrato in base al num di quadrati
+        
         const squareWidth = Math.sqrt(numSquare);
         const square = document.createElement('div');
         square.classList.add ('square');
         square.innerText = n;
-        // aggiungo i valori di largh e alt al quadrato 
+
         square.style.width = `calc(100% / ${squareWidth})`;
         square.style.height = square.style.width;
-        // creo l'evento del click sul quadrato
+
         square.addEventListener('click', squareClick);
         return square;
     }
@@ -31,17 +31,14 @@ function campoMinato (){
         console.log(this.innerText);
     }
 
-    // creo l'evento del bottone 
     btn.addEventListener('click', play);
 
     function play (){
 
-        // aggiungo il reset 
         alert.innerHTML = '';
         playground.innerHTML = '';
         let nSquare = 0;
 
-        // aggiungo la variabile per la difficoltà 
         let difficulty = difficultyBox.value ;
         
         if (difficulty === '1'){
@@ -54,13 +51,32 @@ function campoMinato (){
             alert.innerHTML = 'Attenzione! scegli la difficoltà a cui vuoi giocare.'
         }
 
-        //creo un ciclo che per nSquare volte crea i quadrati 
+        let bombs = createBombs(nSquare);
+        console.log (bombs);
+
         for (let i = 1; i <= nSquare; i++){
             let square = drawSquare(i,nSquare);
             playground.append (square);
         }
     }
 
-    
+    // creo la funzione per generare le bombe 
+    function createBombs(nSquare){
+        // creo l'array vuoto 
+        let arrayBombs = [];
+
+        // creo un ciclo che crei randomicamente una bomba e la inserisca nell'array
+        while (arrayBombs.length < nBombs){
+            let bomb = getRndInteger (1, nSquare);
+            if (!arrayBombs.includes(bomb)){
+                arrayBombs.push(bomb);
+            }
+        }
+        return arrayBombs;
+    }
+
+    function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
  
 }
