@@ -34,16 +34,20 @@ function campoMinato (){
         } else if (difficulty === '3'){
             nSquare = 49;
         } else {
+            nSquare= 0;
             myAlert.innerHTML = 'Attenzione! scegli la difficoltà a cui vuoi giocare'
         }
-
-        let bombs = createBombs(nSquare);
-        console.log (bombs);
-
-        for (let i = 1; i <= nSquare; i++){
-            let square = drawSquare(i,nSquare);
-            playground.append (square);
+        
+        if(nSquare !== 0){
+            let bombs = createBombs(nSquare);
+            console.log (bombs);
+    
+            for (let i = 1; i <= nSquare; i++){
+                let square = drawSquare(i,nSquare);
+                playground.append (square);
+            }
         }
+       
 
         function squareClick() {
             if (!this) return;
