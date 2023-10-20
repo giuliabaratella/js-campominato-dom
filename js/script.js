@@ -97,6 +97,10 @@ function campoMinato (){
             for (let i = 0; i < allSquares.length; i++){
                 let el = allSquares[i];
                 el.removeEventListener('click', squareClick);
+                if (bombs.includes(parseInt(el.innerHTML))){
+                    el.classList.add('bomb');
+                    el.innerHTML = '<i class="fa-solid fa-bomb fa-beat-fade"></i>';
+                }
             }
         }
         
