@@ -14,6 +14,7 @@ function campoMinato (){
     let score = 0;
     const nScore = document.getElementById('n-score');
     nScore.innerHTML = score;
+    let maxScore;
 
     btn.addEventListener('click', play);
 
@@ -46,6 +47,9 @@ function campoMinato (){
 
         function squareClick() {
             if (!this) return;
+            // faccio in modo che il quadratino non possa essere cliccato più volte 
+            this.removeEventListener('click',squareClick);
+
             // aggiungo le condizioni in caso la casella contenga una bomba 
             // (se l'array delle bombe include il numero della casella)
             if (bombs.includes(parseInt(this.innerText))){
@@ -79,7 +83,7 @@ function campoMinato (){
         // creo la funzione per la vittoria e la sconfitta
 
         function win (score){
-            const maxScore = (nSquare - nBombs);
+            maxScore = (nSquare - nBombs);
             console.log (maxScore);
             if (score === maxScore){
                 alert(`Hai vinto! Il tuo punteggio è ${score}`)
