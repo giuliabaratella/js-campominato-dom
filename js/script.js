@@ -92,6 +92,12 @@ function campoMinato (){
 
         function gameOver(score) {
             alert(`Hai trovato una bomba, hai perso! Il tuo punteggio è ${score}`)
+            const allSquares = document.getElementsByClassName('square');
+            // rimuovo il click ad ogni quadratino dopo il game over 
+            for (let i = 0; i < allSquares.length; i++){
+                let el = allSquares[i];
+                el.removeEventListener('click', squareClick);
+            }
         }
         
     }
